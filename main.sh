@@ -66,9 +66,14 @@ function ipsh(){
 wget -O ipsh.sh https://raw.githubusercontent.com/WJQSERVER/shell/main/ipsh.sh && chmod +x ipsh.sh && clear && ./ipsh.sh
 }
 
-#三网回程
+#三网回程线路测试
 function 3mtr-back(){
 curl https://raw.githubusercontent.com/zhanghanyun/backtrace/main/install.sh -sSf | sh
+}
+
+#三网测速
+function 3speedtest(){
+bash <(curl -Lso- https://git.io/superspeed)
 }
 
 #主菜单
