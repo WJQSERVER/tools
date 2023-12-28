@@ -66,6 +66,11 @@ function ipsh(){
 wget -O ipsh.sh https://raw.githubusercontent.com/WJQSERVER/shell/main/ipsh.sh && chmod +x ipsh.sh && clear && ./ipsh.sh
 }
 
+#三网回程
+function 3mtr-back(){
+curl https://raw.githubusercontent.com/zhanghanyun/backtrace/main/install.sh -sSf | sh
+}
+
 #主菜单
 function start_menu(){
     clear
