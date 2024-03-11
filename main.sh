@@ -1,30 +1,17 @@
 #! /bin/bash
 # By WJQSERVER-STUDIO_WJQSERVER
-#https://github.com/WJQSERVER/shell
+#https://github.com/WJQSERVER/tools-dev
 
 # 显示免责声明
-echo "免责声明：请阅读并同意以下条款才能继续使用本程序。"
-echo "本程序仅供学习和参考使用，作者不对其完整性、准确性或实用性做出任何保证。"
-echo "使用本程序所造成的任何损失或损害，作者不承担任何责任。"
+#"免责声明：请阅读并同意以下条款才能继续使用本程序。"
+#"本脚本仅供学习和参考使用，作者不对其完整性、准确性或实用性做出任何保证。"
+#"使用本脚本所造成的任何损失或损害，作者不承担任何责任。"
+#"当前版本为V.0.5-BETA,BETA版仅供测试使用。"
 
-# 显示确认提示
-read -p "您是否同意上述免责声明？(y/n): " confirm
-
-# 处理确认输入
-if [[ $confirm != [Yy] ]]; then
-    echo "您必须同意免责声明才能继续使用本程序。"
-    exit 1
-fi
-
-# 确认执行操作
-read -p "此操作将安装 wget, curl, vim 等常用软件包并进行更新。是否继续？(不进行此操作可能造成脚本异常)(y/n) " choice
-
-if [[ $choice == "y" ]]; then
-  # 安装软件包
-  apt update
-  sudo apt upgrade -y
-  apt install wget curl vim git sudo -y
-fi
+# 导入配置文件
+#GLOBAL https://raw.githubusercontent.com/WJQSERVER/tools-dev/BETA/
+#CN https://tools.wjqserver.xyz/https://raw.githubusercontent.com/WJQSERVER/tools-dev/BETA/
+source "repo_url.conf"
 
 #彩色
 red(){
@@ -40,114 +27,105 @@ blue(){
     echo -e "\033[34m\033[01m$1\033[0m"
 }
 
-#Docker及Docker-compose一键安装脚本
-function dockersh(){
-wget -O docker.sh https://raw.githubusercontent.com/WJQSERVER/shell/main/docker.sh && chmod +x docker.sh && clear && ./docker.sh
+#系统信息
+function sysinfo(){
+    wget -O sysinfo.sh ${repo_url}sysinfo.sh && chmod +x sysinfo.sh && ./sysinfo.sh
 }
 
-#SWAP一键脚本
-function swapsh(){
-wget -O swap.sh https://raw.githubusercontent.com/WJQSERVER/shell/main/swap.sh && chmod +x swap.sh && clear && ./swap.sh
+#docker管理
+function docker-manager(){
+    wget -O docker-manager-menu.sh ${repo_url}docker-manager/docker-manager-menu.sh && chmod +x docker-manager-menu.sh && ./docker-manager-menu.sh
 }
 
-#Nginx Proxy Manager一键部署脚本
-function npmsh(){
-wget -O nginxproxymanager.sh https://raw.githubusercontent.com/WJQSERVER/shell/main/nginxproxymanager.sh && chmod +x nginxproxymanager.sh && clear && ./nginxproxymanager.sh
+#系统工具菜单
+function systools(){
+    wget -O systools-menu.sh ${repo_url}systools/systools-menu.sh && chmod +x systools-menu.sh && ./systools-menu.sh
 }
 
-#Portainer中文版一键部署
-function portainersh(){
-docker run -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v /dockerData/portainer:/data --restart=always --name portainer 6053537/portainer-ce:latest
-echo "可以通过 http://<服务器IP>:9000 访问 Portainer。"
+#面板部署菜单
+function panel(){
+    wget -O panel-menu.sh ${repo_url}panel/panel-menu.sh && chmod +x panel-menu.sh && ./panel-menu.sh
 }
 
-#网络信息查看
-function ipsh(){
-wget -O ipsh.sh https://raw.githubusercontent.com/WJQSERVER/shell/main/ipsh.sh && chmod +x ipsh.sh && clear && ./ipsh.sh
+#项目部署菜单
+function program(){
+    wget -O program-menu.sh ${repo_url}program/program-menu.sh && chmod +x program-menu.sh && ./program-menu.sh
 }
 
-#三网回程线路测试
-function 3mtr-back(){
-curl https://raw.githubusercontent.com/zhanghanyun/backtrace/main/install.sh -sSf | sh
+#测试工具菜单
+function test-tool(){
+    wget -O test-menu.sh ${repo_url}Test/test-menu.sh && chmod +x test-menu.sh && ./test-menu.sh
 }
 
-#三网测速
-function 3speedtest(){
-bash <(curl -Lso- https://git.io/superspeed)
+#网站部署菜单
+function web(){
+    wget -O web-menu.sh ${repo_url}web/web-menu.sh && chmod +x web-menu.sh && ./web-menu.sh
+}
+
+#更多脚本
+function bash(){
+    wget -O bashmenu.sh ${repo_url}bash/bashmenu.sh && chmod +x bashmenu.sh && ./bashmenu.sh    
+}
+
+#代理节点管理
+function proxy(){
+    wget -O proxy-menu.sh ${repo_url}proxy/proxy-menu.sh && chmod +x proxy-menu.sh && ./proxy-menu.sh
 }
 
 #主菜单
 function start_menu(){
     clear
-    red " WJQserver Studio tools" 
-    green " 由WJQserver Studio提供的快捷工具箱 "
-    green " FROM: https://github.com/WJQSERVER/shell "
-    green " USE:  wget -O menu.sh https://raw.githubusercontent.com/WJQSERVER/shell/main/menu.sh && chmod +x menu.sh && clear && ./menu.sh "
+    yellow " WJQserver Studio的快捷工具箱 BETA版 "
+    green " WJQserver Studio tools BETA" 
+    yellow " FROM: https://github.com/WJQSERVER/tools-dev "
+    green " USE:  wget -O tools.sh ${repo_url}tools.sh && chmod +x tools.sh && clear && ./tools.sh "
     yellow " =================================================="
-    green " 1. 网络信息查看" 
-    green " 2. Unavailable"
-    green " 3. Unavailable"
-    green " 4. Unavailable" 
-    green " 5. Unavailable"
-    green " 6. Unavailable"
-    green " 7. Unavailable"
-    yellow " --------------------------------------------------"
-    green " 11. Docker和Docker-compose安装"
-    green " 12. SWAP一键安装/卸载脚本" 
-    green " 13. Unavailable"
-    green " 14. Unavailable"
-    green " 15. Unavailable"
-    green " 16. Unavailable"
-    green " 17. Unavailable" 
-    green " 18. Unavailable"
-    green " 19. Unavailable"
-    yellow " --------------------------------------------------"
-    green " 21. Nginx Proxy Manager一键部署脚本"
-    green " 22. Portainer中文版一键部署"
-    green " 23. Unavailable"
-    green " 24. Unavailable"
-    green " 25. Unavailable"
-    green " 26. Unavailable"
-    green " 27. Unavailable"
-    green " 28. Unavailable"
-    green " 29. Unavailable"
-    yellow " --------------------------------------------------"
-    green " 31. Unavailable"
-    green " 32. Unavailable"
-    green " 33. Unavailable"
-    yellow " --------------------------------------------------"
-    green " 00. Unavailable"
-    green " =================================================="
+    green " 1. 系统信息查看" 
+    green " 2. Docker管理"
+    green " 3. 系统工具"
+    green " 4. 面板部署" 
+    green " 5. 项目部署"
+    green " 6. 测试工具"
+    green " 7. 网站部署"
+    yellow " =================================================="
+    green " 8. 更多脚本"
+    yellow " =================================================="
+    green " 9. 代理部署"
+    yellow " =================================================="
     green " 0. 退出脚本"
     echo
     read -p "请输入数字:" menuNumberInput
     case "$menuNumberInput" in
         1 )
-           ipsh
-	;;
+           sysinfo
+	    ;;
         2 )
-           iptsh
-	;;
-        3 )
-           speedtest-linux
-	;;
+	       docker-manager
+        ;;
+	    3 )
+           systools
+	    ;;
         4 )
-           clonesh
+	       panel
         ;;
-	11 )
-            dockersh
-	;;    
-	12 )
-            swapsh
+	    5 )
+           program
+	    ;;
+        6 )
+	       test-tool
         ;;
-        21 )
-	    npmsh
+	    7 )
+           web
+	    ;;
+        8 )
+           bash
         ;;
-	22 )
-            portainersh
-	;;    
+        9 )
+           proxy
+        ;;
+
         0 )
-            exit 1
+           exit 1
         ;;
 	
         * )
