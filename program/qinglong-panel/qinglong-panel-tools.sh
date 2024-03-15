@@ -57,7 +57,7 @@ sleep 1
 read -p "是否返回菜单?: [Y/n]" choice
 
 if [[ "$choice" == "" || "$choice" == "Y" || "$choice" == "y" ]]; then
-    echo "back2memu_changeme"
+    wget -O qinglong-panel.sh ${repo_url}program/qinglong-panel/qinglong-panel.sh && chmod +x qinglong-panel.sh && ./qinglong-panel.sh
 else
     echo "脚本结束"
 fi

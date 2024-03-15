@@ -32,9 +32,9 @@ function nginxproxymanager(){
     wget -O nginxproxymanager.sh ${repo_url}program/nginxproxymanager.sh && chmod +x nginxproxymanager.sh && ./nginxproxymanager.sh
 }
 
-#portainer
-function portainer(){
-    wget -O portainer.sh ${repo_url}program/portainer.sh && chmod +x portainer.sh && ./portainer.sh
+#Docker管理WEBUI
+function docker_manager_webui(){
+    wget -O docker_manager_webui_menu.sh ${repo_url}program/docker_manager_webui/docker_manager_webui_menu.sh && chmod +x docker_manager_webui_menu.sh && ./docker_manager_webui_menu.sh
 }
 
 #speedtest-x
@@ -62,7 +62,7 @@ function serverstatus(){
     wget -O serverstatus.sh ${repo_url}program/serverstatus.sh && chmod +x serverstatus.sh && ./serverstatus.sh
 }
 
-#NAS面板
+#sun-panel面板
 function sun-panel(){
     wget -O sun-panel.sh ${repo_url}program/sun-panel.sh && chmod +x sun-panel.sh && ./sun-panel.sh
 }
@@ -72,9 +72,9 @@ function cat(){
     wget -O cat.sh ${repo_url}program/cat.sh && chmod +x cat.sh && ./cat.sh    
 }
 
-#雷池
-function safeline(){
-    bash -c "$(curl -fsSLk https://waf-ce.chaitin.cn/release/latest/setup.sh)"    
+#one-nav
+function one-nav(){
+    wget -O one-nav.sh ${repo_url}program/one-nav.sh && chmod +x one-nav.sh && ./one-nav.sh
 }
 
 #QB离线下载BT/PT
@@ -134,7 +134,12 @@ function qinglong_panel(){
 
 #Caddy
 function caddy(){
-    wget -O caddy.sh ${repo_url}program/caddy.sh && chmod +x caddy.sh && ./caddy.sh
+    wget -O caddy-menu.sh ${repo_url}program/caddy/caddy-menu.sh && chmod +x caddy-menu.sh && ./caddy-menu.sh
+}
+
+#聊天机器人
+function chatbot(){
+    wget -O chatbot_menu.sh ${repo_url}program/chatbot/chatbot_menu.sh && chmod +x chatbot_menu.sh && ./chatbot_menu.sh
 }
 
 #返回主脚本
@@ -150,15 +155,15 @@ function start_menu(){
     yellow " FROM: https://github.com/WJQSERVER/tools-dev "
     green " USE:  wget -O tools.sh ${repo_url}tools.sh && chmod +x tools.sh && clear && ./tools.sh "
     yellow " =================================================="
-    green " 1. Nginx Proxy Manager 可视化Nginx管理面板"        
-    green " 2. Portainer 可视化Docker管理面板"                  
+    green " 1. Nginx系列&WAF"        
+    green " 2. Docker管理面板"                  
     green " 3. Speedtest-X 测速面板" 
     green " 4. 青龙面板" 
     green " 5. Uptime-Kuma"
     green " 6. ADGuard Home 去广告,DNS面板"
     green " 7. ServerStatus探针"
     green " 8. Sun Panel NAS面板"
-    green " 9. 雷池WAF"
+    green " 9. One-NAV导航"
     green " 10.QBittorrent BT/PT下载"
     green " 11.Alist"
     green " 12.ALLTube视频下载"
@@ -169,6 +174,7 @@ function start_menu(){
     green " 17.中微子代理"
     green " 18.青龙代挂面板" 
     green " 19.Caddy"
+    green " 20.聊天机器人"
     yellow " =================================================="
     green " 0. 返回主脚本"
     echo
@@ -178,7 +184,7 @@ function start_menu(){
            nginxproxymanager
 	    ;;
         2 )
-	       portainer
+	       docker_manager_webui
         ;;
 	    3 )
            speedtest-x
@@ -199,7 +205,7 @@ function start_menu(){
            sun-panel
         ;;
         9 )
-           safeline 
+           one-nav 
         ;;
         10)
            qbittorrent
@@ -230,7 +236,10 @@ function start_menu(){
         ;;
         19)
            caddy
-        ;;         
+        ;;
+        20)
+           chatbot
+        ;;            
         90)
            v2raya
         ;;   

@@ -15,9 +15,6 @@ cd /root/data/docker_data/*
 # 从用户输入中获取容器端口
 read -p "请输入容器端口: " PORT
 
-#拉取镜像
-docker pull #xx/xx:latest
-
 # 创建 docker-compose.yml 文件
 cat > docker-compose.yml <<EOF
 #read

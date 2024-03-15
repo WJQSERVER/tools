@@ -9,29 +9,29 @@ if ! command -v docker >/dev/null || ! command -v docker-compose >/dev/null; the
 fi
 
 # 创建目录
-mkdir -p /root/data/docker_data/elmmb
-cd /root/data/docker_data/elmmb
-
-#拉取镜像
-docker pull luobook/elmmb:latest
+mkdir -p /root/data/docker_data/ntqq
+cd /root/data/docker_data/ntqq
+# 从用户输入中获取容器端口
+read -p "请输入容器连接端口: " LINKPORT
 
 # 从用户输入中获取容器端口
-read -p "请输入容器端口: " PORT
+read -p "请输入容器VNC端口: " VNCPORT
+
+#拉取镜像
+docker pull luomubiji/ntqq:latest
 
 # 创建 docker-compose.yml 文件
 cat > docker-compose.yml <<EOF
 version: '3.9'
 services:
-    elmmb:
-        image: 'luobook/elmmb:latest'
-        restart: always
-        privileged: true
-        volumes:
-            - './elmmb:/etc/lb/Config'
+    ntqq:
+        image: 'luomubiji/ntqq:latest'
         ports:
-            - '$PORT:3000'
-        container_name: elmmb
-        stdin_open: true
+            - '$LINKPORT:3000'
+            - '$VNCPORT:5900'
+        volumes:
+            - './LLOneBot/:/opt/QQ/resources/app/LiteLoaderQQNT/data/LLOneBot/'
+        container_name: NTQQ
 
 EOF
 
@@ -40,8 +40,6 @@ docker-compose up -d
 
 # 提示服务访问地址
 echo "服务已成功启动！"
-echo "请访问以下地址来访问您的服务："
-echo "http://<服务器IP>:$PORT"
 
 #回到root目录
 cd /root
@@ -56,7 +54,7 @@ sleep 1
 read -p "是否返回菜单?: [Y/n]" choice
 
 if [[ "$choice" == "" || "$choice" == "Y" || "$choice" == "y" ]]; then
-    wget -O qinglong-panel.sh ${repo_url}program/qinglong-panel/qinglong-panel.sh && chmod +x qinglong-panel.sh && ./qinglong-panel.sh
+    wget -O chatbot_menu.sh ${repo_url}program/chatbot/chatbot_menu.sh && chmod +x chatbot_menu.sh && ./chatbot_menu.sh
 else
     echo "脚本结束"
 fi

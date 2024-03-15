@@ -9,29 +9,29 @@ if ! command -v docker >/dev/null || ! command -v docker-compose >/dev/null; the
 fi
 
 # 创建目录
-mkdir -p /root/data/docker_data/elmmb
-cd /root/data/docker_data/elmmb
-
-#拉取镜像
-docker pull luobook/elmmb:latest
+mkdir -p /root/data/docker_data/nginx
+cd /root/data/docker_data/nginx
 
 # 从用户输入中获取容器端口
 read -p "请输入容器端口: " PORT
+
+#拉取镜像
+docker pull nginx:latest
 
 # 创建 docker-compose.yml 文件
 cat > docker-compose.yml <<EOF
 version: '3.9'
 services:
-    elmmb:
-        image: 'luobook/elmmb:latest'
-        restart: always
-        privileged: true
+    nginx:
+        image: 'nginx:latest'
         volumes:
-            - './elmmb:/etc/lb/Config'
+            - './html:/usr/share/nginx/html'
+            - './certs:/etc/nginx/certs'
+            - './nginx.conf:/etc/nginx/nginx.conf'
         ports:
-            - '$PORT:3000'
-        container_name: elmmb
-        stdin_open: true
+            - '443:443'
+            - '80:80'
+        container_name: nginx
 
 EOF
 
@@ -56,7 +56,7 @@ sleep 1
 read -p "是否返回菜单?: [Y/n]" choice
 
 if [[ "$choice" == "" || "$choice" == "Y" || "$choice" == "y" ]]; then
-    wget -O qinglong-panel.sh ${repo_url}program/qinglong-panel/qinglong-panel.sh && chmod +x qinglong-panel.sh && ./qinglong-panel.sh
+    wget -O nginx_menu.sh ${repo_url}program/nginx/nginx_menu.sh && chmod +x nginx_menu.sh && ./nginx_menu.sh
 else
     echo "脚本结束"
 fi

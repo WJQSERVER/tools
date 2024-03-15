@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /bin/bash
 
 # 检测发行版类型
 if [ -f /etc/os-release ]; then
@@ -15,22 +15,27 @@ else
     exit 1
 fi
 
-# 根据发行版类型执行相应的命令
 case $DISTRIBUTION in
     "ubuntu")
-        #apt update
+        apt install btop
+        btop
         ;;
     "debian")
-        #apt-get update
+        apt install btop
+        btop
         ;;
     "centos" | "rhel")
-        #yum update
+        yum install epel-release
+        yum install btop
+        btop
         ;;
     "openwrt")
-        #opkg update
+        opkg install btop
+        btop
         ;;
     "alpine")
-        #apk update
+        apk add btop
+        btop
         ;;    
     *)
         echo "暂不支持该发行版"

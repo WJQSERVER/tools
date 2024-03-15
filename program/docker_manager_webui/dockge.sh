@@ -9,30 +9,30 @@ if ! command -v docker >/dev/null || ! command -v docker-compose >/dev/null; the
 fi
 
 # 创建目录
-mkdir -p /root/data/docker_data/elmmb
-cd /root/data/docker_data/elmmb
-
-#拉取镜像
-docker pull luobook/elmmb:latest
+mkdir -p /root/data/docker_data/dockge
+cd /root/data/docker_data/dockge
 
 # 从用户输入中获取容器端口
 read -p "请输入容器端口: " PORT
 
+#拉取镜像
+docker pull louislam/dockge:1
+
 # 创建 docker-compose.yml 文件
 cat > docker-compose.yml <<EOF
-version: '3.9'
+version: "3.8"
 services:
-    elmmb:
-        image: 'luobook/elmmb:latest'
-        restart: always
-        privileged: true
-        volumes:
-            - './elmmb:/etc/lb/Config'
-        ports:
-            - '$PORT:3000'
-        container_name: elmmb
-        stdin_open: true
-
+  dockge:
+    image: louislam/dockge:1
+    restart: unless-stopped
+    ports:
+      - $PORT:5001
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/app/data
+      - /root/data/docker_data:/root/data/docker_data
+    environment:
+      - DOCKGE_STACKS_DIR=/root/data/docker_data
 EOF
 
 # 启动容器
@@ -56,7 +56,7 @@ sleep 1
 read -p "是否返回菜单?: [Y/n]" choice
 
 if [[ "$choice" == "" || "$choice" == "Y" || "$choice" == "y" ]]; then
-    wget -O qinglong-panel.sh ${repo_url}program/qinglong-panel/qinglong-panel.sh && chmod +x qinglong-panel.sh && ./qinglong-panel.sh
+    wget -O docker_manager_webui_menu.sh ${repo_url}program/docker_manager_webui/docker_manager_webui_menu.sh && chmod +x docker_manager_webui_menu.sh && ./docker_manager_webui_menu.sh
 else
     echo "脚本结束"
 fi

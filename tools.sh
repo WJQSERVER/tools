@@ -25,7 +25,7 @@ read -p "您是否同意上述免责声明？(y/n): " confirm
 
 # 处理确认输入
 if [[ $confirm != [Yy] ]]; then
-    echo "您必须同意免责声明才能继续使用本程序。"
+    echo "您必须同意免责声明才能继续使用本脚本。"
     exit 1
 fi
 

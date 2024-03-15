@@ -9,29 +9,27 @@ if ! command -v docker >/dev/null || ! command -v docker-compose >/dev/null; the
 fi
 
 # 创建目录
-mkdir -p /root/data/docker_data/elmmb
-cd /root/data/docker_data/elmmb
-
-#拉取镜像
-docker pull luobook/elmmb:latest
+mkdir -p /root/data/docker_data/*
+cd /root/data/docker_data/*
 
 # 从用户输入中获取容器端口
 read -p "请输入容器端口: " PORT
 
 # 创建 docker-compose.yml 文件
 cat > docker-compose.yml <<EOF
-version: '3.9'
+version: "2"
 services:
-    elmmb:
-        image: 'luobook/elmmb:latest'
-        restart: always
-        privileged: true
-        volumes:
-            - './elmmb:/etc/lb/Config'
-        ports:
-            - '$PORT:3000'
-        container_name: elmmb
-        stdin_open: true
+  gitea:
+    image: gitea/gitea:1.21.7-rootless
+    restart: always
+    volumes:
+      - ./data:/var/lib/gitea
+      - ./config:/etc/gitea
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "$PORT:3000"
+      - "2222:2222"
 
 EOF
 
@@ -56,7 +54,7 @@ sleep 1
 read -p "是否返回菜单?: [Y/n]" choice
 
 if [[ "$choice" == "" || "$choice" == "Y" || "$choice" == "y" ]]; then
-    wget -O qinglong-panel.sh ${repo_url}program/qinglong-panel/qinglong-panel.sh && chmod +x qinglong-panel.sh && ./qinglong-panel.sh
+    echo "back2memu_changeme"
 else
     echo "脚本结束"
 fi
