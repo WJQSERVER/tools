@@ -3,7 +3,7 @@
 
 V.1.0
 ```
-wget -O tools.sh https://raw.githubusercontent.com/WJQSERVER/tools-dev/main/tools.sh && chmod +x tools.sh && clear && ./tools.sh
+wget -O tools.sh https://raw.githubusercontent.com/WJQSERVER/tools/main/tools.sh && chmod +x tools.sh && clear && ./tools.sh
 ```
 V.1.0
 ```
