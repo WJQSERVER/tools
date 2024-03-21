@@ -1,5 +1,5 @@
-# WJQserver-tools-BETA
-由WJQserver Studio推出的快捷Linux工具箱-测试版本
+# WJQserver-tools
+由WJQserver Studio推出的快捷Linux工具箱
 
 V.1.0
 ```
