@@ -7,7 +7,7 @@ wget -O tools.sh https://raw.githubusercontent.com/WJQSERVER/tools/main/tools.sh
 ```
 V.1.0
 ```
-wget -O tools-cn.sh https://tools.wjqserver.xyz/https://raw.githubusercontent.com/WJQSERVER/tools-dev/main/tools-cn.sh && chmod +x tools-cn.sh && clear && ./tools-cn.sh
+wget -O tools-cn.sh https://gh.1888866.xyz/https://raw.githubusercontent.com/WJQSERVER/tools-dev/main/tools-cn.sh && chmod +x tools-cn.sh && clear && ./tools-cn.sh
 ```
 # 声明
 
