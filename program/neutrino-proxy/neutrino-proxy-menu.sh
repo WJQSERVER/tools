@@ -50,8 +50,8 @@ function start_menu(){
     yellow " FROM: https://github.com/WJQSERVER/tools-dev "
     green " USE:  wget -O tools.sh ${repo_url}tools.sh && chmod +x tools.sh && clear && ./tools.sh "
     yellow " =================================================="
-    green " 1. " 
-    green " 2. "
+    green " 1. 服务端" 
+    green " 2. 客户端·"
     yellow " =================================================="
     green " 0. 返回主脚本"
     echo
