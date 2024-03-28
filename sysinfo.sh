@@ -85,27 +85,31 @@ city=$(curl -s ipinfo.io/city)
 # 获取系统时间
 system_time=$(date +"%Y-%m-%d %I:%M %p")
 
+# 获取当前系统时区
+current_timezone=$(timedatectl show --property=Timezone --value)
+
 # 显示系统信息
 echo "系统信息:"
 echo "---------------------------"
 echo "主机名: $hostname"
 echo "运营商: $isp"
 echo "发行版版本：$pretty_name"
-echo "Linux版本: $linux_version"
-echo "虚拟化：$virtualization_architecture"
-echo "CPU架构: $cpu_arch"
-echo "CPU型号: $cpu_model"
-echo "CPU核心数: $cpu_cores"
-echo "虚拟化支持: $virtualization_support"
 echo "CPU占用: $cpu_usage%"
 echo "物理内存：$used_mem/$total_mem ($used_percentage%)"
-echo "虚拟内存: $swap_memory"
 echo "硬盘占用: $disk_usage"
 echo "公网IPv4地址: $public_ipv4"
 echo "IPv6地址: $local_ipv6"
+echo "CPU型号: $cpu_model"
+echo "CPU核心数: $cpu_cores"
+echo "虚拟内存: $swap_memory"
+echo "Linux版本: $linux_version"
+echo "虚拟化：$virtualization_architecture"
+echo "CPU架构: $cpu_arch"
+echo "虚拟化支持: $virtualization_support"
 echo "所在地区: $country"
 echo "所在城市: $city"
 echo "系统时间: $system_time"
+echo "系统时区：$current_timezone"
 echo "---------------------------"
 
 #回到root目录
