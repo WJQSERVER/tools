@@ -144,6 +144,20 @@ function hyperspeed(){
     fi
 }
 
+#speedtest i-abc
+function iabcspeedtest(){
+    clear
+    bash <(curl -sL bash.icu/speedtest)
+    sleep 1
+    #返回菜单/退出脚本
+    read -p "是否返回菜单?: [Y/n]" choice
+    if [[ "$choice" == "" || "$choice" == "Y" || "$choice" == "y" ]]; then
+        wget -O test-menu.sh ${repo_url}Test/test-menu.sh && chmod +x test-menu.sh && ./test-menu.sh
+    else
+        echo "脚本结束"
+    fi    
+}
+
 #Lemonbench 综合测试
 function lemonbench(){
     clear    
