@@ -1,4 +1,7 @@
 # WJQserver-tools
+
+## 已转向tools-stable项目
+
 由WJQserver Studio推出的快捷Linux工具箱
 
 V.1.0
